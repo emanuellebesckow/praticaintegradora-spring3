@@ -2,11 +2,13 @@ package com.mercadolibre.repository;
 
 
 import com.mercadolibre.model.Prato;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Repository
 public class PratoRepository {
 
     List<Prato> listaPratos = new ArrayList<>(
