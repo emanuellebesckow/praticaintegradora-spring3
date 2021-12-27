@@ -13,20 +13,25 @@ import java.util.concurrent.atomic.AtomicReference;
 @Service
 public class PedidoService {
 
+    //TODO - Colocar quantidade no calculo do total
+
     @Autowired
     PedidoRepository pedidoRepository;
 
-    public Pedido adicionarPedidoNaMesa(List<Prato> listaPratos, int idMesa) {
+    private static int ID = 0;
+
+    public Pedido adicionarPratoAoPedido(List<Prato> listaPratos, int idMesa) {
         AtomicReference<Double> totalPratos = new AtomicReference<>((double) 0); //referencia atomica para o stream
 
         listaPratos.stream().forEach(prato -> {
             totalPratos.accumulateAndGet(prato.getPreco(), Double::sum);
         });
 
-        Pedido p = Pedido.builder().listaPratos(listaPratos).idMesa(idMesa).total(totalPratos.get()).build();
+        ID ++;
+        Pedido pedido = Pedido.builder().listaPratos(listaPratos).idMesa(idMesa).id(ID).total(totalPratos.get()).build();
 
-        pedidoRepository.createPedido(p);
-        return p;
+        pedidoRepository.createPedido(pedido);
+        return pedido;
     }
 
     public List<Pedido> findAll() {

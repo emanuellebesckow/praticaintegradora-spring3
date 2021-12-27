@@ -24,7 +24,7 @@ public class PedidoController {
 
     @PostMapping(value = "/mesa/{idMesa}")
     public ResponseEntity<?> criarPedido(@RequestBody List<Prato> pratos, @PathVariable int idMesa){
-        Pedido pedido = pedidoService.adicionarPedidoNaMesa(pratos, idMesa);
+        Pedido pedido = pedidoService.adicionarPratoAoPedido(pratos, idMesa);
         return ResponseEntity.ok(pedido);
     }
 
