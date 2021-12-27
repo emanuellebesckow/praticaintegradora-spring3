@@ -17,7 +17,7 @@ public class Pedido implements Serializable {
     private static final long serialVersionUID = -6742351743562212951L;
 		
 	private int id;
-    private Mesa mesa;
+    private int idMesa;
     private List<Prato> listaPratos;
     private double total;
 
