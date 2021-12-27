@@ -16,6 +16,12 @@ public class PedidoController {
     @Autowired
     PedidoService pedidoService;
 
+    @GetMapping
+    public ResponseEntity<?> mostrarPedidos(){
+        List<Pedido> pedido = pedidoService.findAll();
+        return ResponseEntity.ok(pedido);
+    }
+
     @PostMapping(value = "/mesa/{idMesa}")
     public ResponseEntity<?> criarPedido(@RequestBody List<Prato> pratos, @PathVariable int idMesa){
         Pedido pedido = pedidoService.adicionarPedidoNaMesa(pratos, idMesa);

@@ -29,4 +29,7 @@ public class PedidoService {
         return p;
     }
 
+    public List<Pedido> findAll() {
+        return pedidoRepository.getPedido();
+    }
 }
