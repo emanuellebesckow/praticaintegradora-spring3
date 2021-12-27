@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Stream;
+
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class MesaService {
@@ -22,17 +24,16 @@ public class MesaService {
 
         List<Pedido> pedidos = pedidoService.findAll();
 
-        pedidos.stream().filter(pedido -> pedido.getId() == idMesa);
+        List<Pedido> pedidosMesa = pedidos.stream().filter(pedido -> pedido.getIdMesa() == idMesa).collect(toList());
 
-        AtomicReference<Double> totalMesa = new AtomicReference<>((double) 0); //referencia atomica para o stream que faz calculo
+       AtomicReference<Double> totalMesa = new AtomicReference<>((double) 0); //referencia atomica para o stream que faz calculo
 
-        pedidos.stream().forEach(pedido -> {
+        pedidosMesa.stream().forEach(pedido -> {
             totalMesa.accumulateAndGet(pedido.getTotal(), Double::sum);
         });
 
+       mesaRepository.getMesas();
         return null;
     }
-
-
 
 }

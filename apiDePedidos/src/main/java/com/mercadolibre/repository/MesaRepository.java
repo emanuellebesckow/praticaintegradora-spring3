@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class MesaRepository {
@@ -18,8 +19,24 @@ public class MesaRepository {
 
     );
 
-    public List<Mesa> getMesa(){
+    public List<Mesa> getMesas() {
         return listaMesa;
     }
 
+    public Mesa getMesa(int id) {
+
+        Mesa mesaSelecionada;
+        for (Mesa m : listaMesa) {
+            if (m.getId() == id) {
+                return m;
+            }
+
+        }
+        return null;
+        //Optional<Mesa> mesa = listaMesa.stream().filter(mesa -> mesa.getId() == id).findFirst();
+        // return mesa.get();
+    }
 }
+
+
+
