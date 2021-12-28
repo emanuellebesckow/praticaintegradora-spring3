@@ -20,7 +20,7 @@ public class MesaService {
     @Autowired
     PedidoService pedidoService;
 
-    public Mesa listarPedidoNaMesa(int idMesa){
+    public Mesa getMesaComPedidos(int idMesa){
 
         List<Pedido> pedidos = pedidoService.findAll();
 
@@ -32,8 +32,12 @@ public class MesaService {
             totalMesa.accumulateAndGet(pedido.getTotal(), Double::sum);
         });
 
-       mesaRepository.getMesas();
-        return null;
+        
+              
+        mesaRepository.getMesa(idMesa).setPedidos(pedidosMesa);
+        mesaRepository.getMesa(idMesa).setTotal(totalMesa.get());
+        
+        return mesaRepository.getMesa(idMesa);
     }
-
+    
 }

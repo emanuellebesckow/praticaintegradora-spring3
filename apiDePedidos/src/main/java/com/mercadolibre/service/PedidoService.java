@@ -24,7 +24,7 @@ public class PedidoService {
         AtomicReference<Double> totalPratos = new AtomicReference<>((double) 0); //referencia atomica para o stream
 
         listaPratos.stream().forEach(prato -> {
-            totalPratos.accumulateAndGet(prato.getPreco(), Double::sum);
+            totalPratos.accumulateAndGet((prato.getPreco()*prato.getQuantidade()), Double::sum);
         });
 
         ID ++;
